@@ -1,72 +1,136 @@
-const Product = require('../models/productModel');  // Import the product model
+const Product = require('../models/productModel');
+const asyncHandler = require('express-async-handler');
 
-// Controller function to get all products
-const getAllProducts = async (req, res) => {
-  try {
-    const products = await Product.findAll();  // Retrieve all products from the database
+// Fetch all products
+const getProducts = asyncHandler(async (req, res) => {
+    const products = await Product.find({});
     res.json(products);
-  } catch (err) {
-    res.status(500).json({ message: 'Server error' });
-  }
-};
+});
 
-// Controller function to get a product by ID
-const getProductById = async (req, res) => {
-  try {
-    const product = await Product.findByPk(req.params.id);  // Retrieve product by ID
-    if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
-    }
-    res.json(product);
-  } catch (err) {
-    res.status(500).json({ message: 'Server error' });
-  }
-};
+// Fetch single product
+const getProductById = asyncHandler(async (req, res) => {
+    const product = await Product.findById(req.params.id);
 
-// Controller function to create a new product
-const createProduct = async (req, res) => {
-    try {
-      const { name, price, stock } = req.body;
-      const newProduct = await Product.create({ name, price, stock });
-      res.status(201).json(newProduct);
-    } catch (err) {
-      console.error('Error creating product:', err);
-      res.status(500).json({ message: 'Server error' });
+    if (product) {
+        res.json(product);
+    } else {
+        res.status(404);
+        throw new Error('Product not found');
     }
-};
+});
 
-// Controller function to update a product by ID
-const updateProduct = async (req, res) => {
-  try {
-    const product = await Product.findByPk(req.params.id);
-    if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
-    }
-    const updatedProduct = await product.update(req.body);
-    res.json(updatedProduct);
-  } catch (err) {
-    res.status(500).json({ message: 'Server error' });
-  }
-};
+// Add a new product
+const createProduct = asyncHandler(async (req, res) => {
+    const { name, price, description, stock } = req.body;
 
-// Controller function to delete a product by ID
-const deleteProduct = async (req, res) => {
-  try {
-    const product = await Product.findByPk(req.params.id);
-    if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
+    // Check if the product already exists
+    const productExists = await Product.findOne({ name });
+
+    if (productExists) {
+        res.status(400);
+        throw new Error('Product already exists');
     }
-    await product.destroy();
-    res.status(204).end();
-  } catch (err) {
-    res.status(500).json({ message: 'Server error' });
-  }
-};
+
+    // Create new product
+    const product = new Product({
+        name,
+        price,
+        description,
+        stock,
+    });
+
+    const createdProduct = await product.save();
+    res.status(201).json(createdProduct);
+});
+
+// Update an existing product
+const updateProduct = asyncHandler(async (req, res) => {
+    const { name, price, description, stock } = req.body;
+    const product = await Product.findById(req.params.id);
+
+    if (product) {
+        // Update fields
+        product.name = name || product.name;
+        product.price = price || product.price;
+        product.description = description || product.description;
+        product.stock = stock || product.stock;
+
+        const updatedProduct = await product.save();
+        res.json(updatedProduct);
+    } else {
+        res.status(404);
+        throw new Error('Product not found');
+    }
+});
+
+// Delete a product
+const deleteProduct = asyncHandler(async (req, res) => {
+    const product = await Product.findById(req.params.id);
+
+    if (product) {
+        await product.remove();
+        res.json({ message: 'Product removed' });
+    } else {
+        res.status(404);
+        throw new Error('Product not found');
+    }
+});
+
+// Function to search for products based on query parameters (like name, price range)
+const searchProducts = asyncHandler(async (req, res) => {
+    const { name, minPrice, maxPrice } = req.query;
+
+    let query = {};
+
+    if (name) {
+        query.name = { $regex: name, $options: 'i' }; // Case-insensitive search
+    }
+
+    if (minPrice || maxPrice) {
+        query.price = {};
+        if (minPrice) {
+            query.price.$gte = minPrice;
+        }
+        if (maxPrice) {
+            query.price.$lte = maxPrice;
+        }
+    }
+
+    const products = await Product.find(query);
+
+    res.json(products);
+});
+
+// Function to update stock of a product (increment or decrement)
+const updateProductStock = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const { quantity } = req.body;
+
+    if (!quantity || quantity === 0) {
+        res.status(400);
+        throw new Error('Quantity is required to update stock');
+    }
+
+    const product = await Product.findById(id);
+
+    if (product) {
+        // Update the stock by adding the quantity (could be negative for decrement)
+        product.stock += quantity;
+
+        const updatedProduct = await product.save();
+        res.json(updatedProduct);
+    } else {
+        res.status(404);
+        throw new Error('Product not found');
+    }
+});
 
 module.exports = {
-  getAllProducts,
-  getProductById,
-  createProduct,
-  updateProduct,
-  deleteProduct,
+    getProducts,
+    getProductById,
+    createProduct,
+    updateProduct,
+    deleteProduct,
+    searchProducts,
+    updateProductStock,
 };

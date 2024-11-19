@@ -1,20 +1,31 @@
-const express = require('express'); // Import the express module
-const bodyParser = require('body-parser');
+const express = require('express');
+const dotenv = require('dotenv');
+const connectDB = require('./config/dbConfig');
+const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
-const app = express(); // This initialises the Express app, which will handle the routing and processing of requests
-const PORT = 3000; // Define a port for the server to listen on
-const sequelize = require('./config/dbConfig');
+const orderRoutes = require('./routes/orderRoutes');
+const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 
-app.use(bodyParser.json());
+dotenv.config(); // Carga las variables de entorno
 
-// Use routes
-app.use('/products', productRoutes);
+connectDB(); // Conecta a la base de datos
 
-// Start the server and listen on the defined port
+const app = express();
+
+app.use(express.json()); // Middleware para parsear JSON
+
+// Rutas de la API
+app.use('/api/use', authRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/orders', orderRoutes);
+
+// Middleware de manejo de errores
+app.use(notFound);
+app.use(errorHandler);
+
+const PORT = process.env.PORT || 3000; // Define el puerto
+
+// Inicia el servidor
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
-
-sequelize.authenticate()
-  .then(() => console.log('Database connected.'))
-  .catch(err => console.error('Unable to connect to the database:', err));
