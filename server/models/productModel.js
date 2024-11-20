@@ -5,22 +5,44 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    lemma: {
+        type: String,
+        required: false,
+    },
     description: {
         type: String,
         required: true,
+    },
+    category: {
+        type: String,
+        required: true,
+    },
+    scent: {
+        type: String,
+        required: true,
+    },
+    sizes: {
+        type: [String], // Array de tamaños disponibles
+        required: false,
     },
     price: {
         type: Number,
         required: true,
     },
-    countInStock: {
+    wax_weight: {
+        type: Number, // Peso de la cera en gramos
+        required: true,
+    },
+    stock: {
         type: Number,
-        required: true,
+        required: false,
+        default: 0,
     },
-    imageUrl: {
+    imageURL: {
         type: String,
-        required: true,
-    },
+        required: false,
+        default: 'https://example.com/default-image.jpg',
+    }
 });
 
 const Product = mongoose.model('Product', productSchema);
