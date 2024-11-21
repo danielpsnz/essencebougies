@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from "react";
+import { BrowserRouter } from "react-router-dom";
+import NavBar from "./components/navbar/NavBar";
+
+import { Box } from "@mui/system";
 
 function App() {
+  const [darkMode, setDarkMode] = useState(true);
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Welcome to Essence Bougies</h1>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Box className={darkMode ? "light-mode" : "dark-mode"}>
+        <NavBar setDarkMode={setDarkMode} darkMode={darkMode}/>
+      </Box>
+    </BrowserRouter>
   );
 }
 
