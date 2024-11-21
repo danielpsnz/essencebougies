@@ -26,20 +26,20 @@ const productSchema = new mongoose.Schema({
         required: false,
     },
     price: {
-        type: Number,
+        type: [Number],
         required: true,
     },
     wax_weight: {
-        type: Number, // Peso de la cera en gramos
+        type: [Number], // Peso de la cera en gramos
         required: false,
     },
     stock: {
-        type: Number,
+        type: [Number],
         required: false,
-        default: 0,
+        default: [0],
     },
     imageURL: {
-        type: String,
+        type: [String],
         required: false,
         default: 'https://example.com/default-image.jpg',
     }
