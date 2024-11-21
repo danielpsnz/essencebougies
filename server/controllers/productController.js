@@ -49,30 +49,23 @@ const createProduct = asyncHandler(async (req, res) => {
     res.status(201).json(createdProduct);
 });
 
-    // {
-    //     "name": "Vela de café tostado",
-    //     "lemma": "No hay nada mejor que despertar con el aroma de los granos de café por la mañana.",
-    //     "description": "Vela artesanal vertida a mano en un recipiente de cristal con un aroma rico y acogedor de café tostado, de ese que te tomas por la mañana, acentuado con notas de caramelo y crema. Fabricada con cera de soja y mecha de madera para una combustión limpia y crepitante.",
-    //     "category": "Gourmand",
-    //     "scent": "Café + Caramelo + Crema",
-    //     "sizes": ["Estándar - 220g"],
-    //     "price": 10.40,
-    //     "wax_weight": 220,
-    //     "stock": 0,
-    //     "imagenURL": "https://example.com/product-image.jpg"
-    //   }
-
 // Update an existing product
 const updateProduct = asyncHandler(async (req, res) => {
-    const { name, price, description, stock } = req.body;
+    const { name, lemma, description, category, scent, sizes, price, wax_weight, stock, imageURL } = req.body;
     const product = await Product.findById(req.params.id);
 
     if (product) {
         // Update fields
         product.name = name || product.name;
-        product.price = price || product.price;
+        product.lemma = lemma || product.lemma;
         product.description = description || product.description;
+        product.category = category || product.category;
+        product.scent = scent || product.scent;
+        product.sizes = sizes || product.sizes;
+        product.price = price || product.price;
+        product.wax_weight = wax_weight || product.wax_weight; 
         product.stock = stock || product.stock;
+        product.imageURL = imageURL || product.imageURL;
 
         const updatedProduct = await product.save();
         res.json(updatedProduct);
