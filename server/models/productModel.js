@@ -15,11 +15,11 @@ const productSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        required: true,
+        required: false,
     },
     scent: {
         type: String,
-        required: true,
+        required: false,
     },
     sizes: {
         type: [String], // Array de tamaños disponibles
@@ -31,7 +31,7 @@ const productSchema = new mongoose.Schema({
     },
     wax_weight: {
         type: Number, // Peso de la cera en gramos
-        required: true,
+        required: false,
     },
     stock: {
         type: Number,
