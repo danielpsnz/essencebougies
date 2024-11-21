@@ -21,7 +21,7 @@ const getProductById = asyncHandler(async (req, res) => {
 
 // Add a new product
 const createProduct = asyncHandler(async (req, res) => {
-    const { name, price, description, stock } = req.body;
+    const { name, lemma, description, category, scent, sizes, price, wax_weight, stock, imageURL} = req.body;
 
     // Check if the product already exists
     const productExists = await Product.findOne({ name });
@@ -34,9 +34,15 @@ const createProduct = asyncHandler(async (req, res) => {
     // Create new product
     const product = new Product({
         name,
-        price,
+        lemma, 
         description,
+        category,
+        scent,
+        sizes, 
+        price,
+        wax_weight,
         stock,
+        imageURL
     });
 
     const createdProduct = await product.save();
