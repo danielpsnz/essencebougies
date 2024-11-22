@@ -1,18 +1,14 @@
-import React, { useState } from "react";
-import { BrowserRouter } from "react-router-dom";
-import NavBar from "./components/navbar/NavBar";
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import { ThemeProvider } from "./context/ThemeContext";
+import Navigation from "./components/Navigation/Navigation";
 
-import { Box } from "@mui/system";
-
-function App() {
-  const [darkMode, setDarkMode] = useState(true);
-  return (
-    <BrowserRouter>
-      <Box className={darkMode ? "light-mode" : "dark-mode"}>
-        <NavBar setDarkMode={setDarkMode} darkMode={darkMode}/>
-      </Box>
-    </BrowserRouter>
-  );
-}
+const App = () => (
+    <ThemeProvider>
+        <Router>
+            <Navigation />
+        </Router>
+    </ThemeProvider>
+);
 
 export default App;
