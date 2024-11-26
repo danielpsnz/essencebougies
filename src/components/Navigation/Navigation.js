@@ -7,7 +7,8 @@ import { CartContext } from "../../contexts/CartContext";
 import { Logo, MainNav } from "./index.js";
 
 // Imágenes locales
-import LogoImagen from "../../assets/images/Logo_empresa_principal.png";
+import LogoImagenLight from "../../assets/images/Logo_empresa_principal.png";
+import LogoImagenDark from "../../assets/images/Logo_empresa_beige.png";
 import Perfil from "../../assets/images/Imagen_perfil_provisional.jpeg"
 
 // Iconos
@@ -47,7 +48,7 @@ const Navigation = () => {
   return (
     <Disclosure as="nav"
       className={`${
-        isActive ? "bg-white dark:bg-black py-4 shadow-md" : "bg-none py-6"
+        isActive ? "bg-white dark:bg-slate-800 py-4 shadow-md" : "bg-none py-6"
       } fixed w-full z-10 lg:px-8 transition-all`}
     >
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -55,7 +56,7 @@ const Navigation = () => {
           <div className="container mx-auto flex items-center justify-between h-full">
             <div className="absolute inset-y-0 left-3 flex items-center">
               {/* Mobile menu button*/}
-              <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-3 text-gray-900 hover:bg-gray-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-inset focus:ring-black">
+              <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-3 text-gray-900 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600 hover:text-black dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-black dark:focus:ring-white">
                 <span className="absolute -inset-0.5" />
                 <span className="sr-only">Open main menu</span>
                 <Bars3Icon aria-hidden="true" className="block size-6 group-data-[open]:hidden" />
@@ -65,7 +66,7 @@ const Navigation = () => {
 
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="absolute left-1/2 transform -translate-x-1/2">
-                <Logo src={LogoImagen} alt="Logo de la empresa" className="h-14 w-auto mt-3" />
+                <Logo src={darkMode ? LogoImagenDark : LogoImagenLight} alt="Logo de la empresa" className="h-14 w-auto mt-3" />
               </div>
 
               <div className="hidden sm:ml-2 sm:block">
@@ -87,7 +88,7 @@ const Navigation = () => {
                 className="cursor-pointer flex relative"
               >
                 <BsBag className="text-2xl" />
-                <div className="bg-red-500 absolute -right-2 -bottom-2 text-[12px] w-[18px] h-[18px] text-white rounded-full flex justify-center items-center">
+                <div className="bg-red-500 absolute -right-2 -bottom-2 text-[12px] w-[18px] h-[18px] text-white dark:text-black rounded-full flex justify-center items-center">
                   {itemAmount}
                 </div>
               </div>
@@ -96,7 +97,7 @@ const Navigation = () => {
             {/* Profile dropdown */}
             <Menu as="div" className="relative ml-5 mr-6">
               <div>
-                <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                <MenuButton className="relative flex rounded-full bg-gray-800 dark:bg-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-white dark:focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-800 dark:focus:ring-offset-gray-200">
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">Open user menu</span>
                   <img
@@ -109,12 +110,12 @@ const Navigation = () => {
 
               <MenuItems
                 transition
-                className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white dark:bg-slate-900 py-1 shadow-lg ring-1 ring-black/5 dark:ring-white/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
               >
                 <MenuItem>
                   <a
                     href="/"
-                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
+                    className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 data-[focus]:bg-gray-100 dark:data-[focus]:bg-gray-900 data-[focus]:outline-none"
                   >
                     Your Profile
                   </a>
@@ -123,7 +124,7 @@ const Navigation = () => {
                 <MenuItem>
                   <a
                     href="/"
-                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
+                    className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 data-[focus]:bg-gray-100 dark:data-[focus]:bg-gray-900 data-[focus]:outline-none"
                   >
                     Settings
                   </a>
@@ -132,7 +133,7 @@ const Navigation = () => {
                 <MenuItem>
                   <a
                     href="/"
-                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
+                    className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 data-[focus]:bg-gray-100 dark:data-[focus]:bg-gray-900 data-[focus]:outline-none"
                   >
                     Sign out
                   </a>
