@@ -51,43 +51,48 @@ const Navigation = () => {
         isActive ? "bg-white dark:bg-slate-800 py-4 shadow-md" : "bg-none py-6"
       } fixed w-full z-10 lg:px-8 transition-all`}
     >
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-3">
         <div className="relative flex h-16 items-center justify-between">
           <div className="container mx-auto flex items-center justify-between h-full">
             <div className="absolute inset-y-0 left-3 flex items-center">
               {/* Mobile menu button*/}
-              <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-3 text-gray-900 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600 hover:text-black dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-black dark:focus:ring-white">
-                <span className="absolute -inset-0.5" />
-                <span className="sr-only">Open main menu</span>
-                <Bars3Icon aria-hidden="true" className="block size-6 group-data-[open]:hidden" />
-                <XMarkIcon aria-hidden="true" className="hidden size-6 group-data-[open]:block" />
-              </DisclosureButton>
+              <div className="-mr-2 flex lg:hidden">
+                <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-3 text-gray-900 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600 hover:text-black dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-black dark:focus:ring-white">
+                  <span className="sr-only">Open main menu</span>
+                  {isOpen ? (
+                    <XMarkIcon aria-hidden="true" className="block h-6 w-6" />
+                  ) : (
+                    <Bars3Icon aria-hidden="true" className="block h-6 w-6" />
+                  )}
+                </DisclosureButton>
+              </div>
             </div>
 
-            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-              <div className="absolute left-1/2 transform -translate-x-1/2">
+            <div className="flex flex-1 items-center">
+              <div className="absolute left-1/2 transform -translate-x-1/2 lg:mt-2 xl:mt-4">
                 <Logo src={darkMode ? LogoImagenDark : LogoImagenLight} alt="Logo de la empresa" className="h-14 w-auto mt-3" />
               </div>
 
-              <div className="hidden sm:ml-2 sm:block">
-                <MainNav items={mainNavItems} classNameDiv="flex space-x-6 mt-5" />
+              <div className="hidden sm:ml-2 lg:block xl:block">
+                <MainNav items={mainNavItems} classNameDiv="flex space-x-6 lg:space-x-3 mt-5" />
               </div>
             </div>
-
+      
             <button 
               type="button"
               onClick={() => setDarkMode(!darkMode)}
-              className="text-2xl"
+              className="text-2xl mt-2 hidden md:block"
             >
               {darkMode ? '🌙' : '☀️'}
             </button>
-            <div className="absolute inset-y-0 right-0 flex items-center pr-5 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+
+            <div className="ml-3 flex items-center space-x-4">
               {/* cart */}
               <div
                 onClick={() => setIsOpen(!isOpen)}
-                className="cursor-pointer flex relative"
+                className="cursor-pointer flex absolute"
               >
-                <BsBag className="text-2xl" />
+                <BsBag className="text-2xl mt-2" />
                 <div className="bg-red-500 absolute -right-2 -bottom-2 text-[12px] w-[18px] h-[18px] text-white dark:text-black rounded-full flex justify-center items-center">
                   {itemAmount}
                 </div>
@@ -95,15 +100,15 @@ const Navigation = () => {
             </div>
 
             {/* Profile dropdown */}
-            <Menu as="div" className="relative ml-5 mr-6">
+            <Menu as="div" className="relative ml-10 mt-2 hidden md:block">
               <div>
                 <MenuButton className="relative flex rounded-full bg-gray-800 dark:bg-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-white dark:focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-800 dark:focus:ring-offset-gray-200">
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">Open user menu</span>
                   <img
-                    alt=""
+                    alt="Avatar"
                     src={Perfil}
-                    className="w-9 h-9 rounded-full"
+                    className="w-8 h-8 rounded-full"
                   />
                 </MenuButton>
               </div>
@@ -144,8 +149,8 @@ const Navigation = () => {
         </div>
       </div>
 
-      <DisclosurePanel className="sm:hidden">
-        <MainNav items={mainNavItems} classNameDiv="space-y-1 px-2 pb-3 pt-2" />
+      <DisclosurePanel className="lg:hidden">
+        <MainNav items={mainNavItems} classNameDiv="space-y-1 px-10 pb-3 pt-2" />
       </DisclosurePanel>
     </Disclosure>
   );
