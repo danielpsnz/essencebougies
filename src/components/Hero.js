@@ -1,7 +1,7 @@
 export default function Hero() {
 
   return (
-    <div className="bg-white dark:bg-slate-800">
+    <div>
 
       <div className="relative isolate px-6 pt-14 lg:px-8">
         <div
@@ -13,13 +13,13 @@ export default function Hero() {
               clipPath:
                 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
             }}
-            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#902ef1] dark:from-violet-300 to-[#89ccfc] dark:to-teal-400 opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#21a850] to-[#89a4fc] dark:to-[#82582f] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
           />
         </div>
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="relative rounded-full px-3 py-1 text-sm/6 text-gray-600 dark:text-gray-300 ring-1 ring-gray-900/10 dark:ring-gray-100/10 hover:ring-gray-900/20 dark:hover:ring-gray-100/20">
-              Niño aquí no sé que poner aún pero es un ejemplo.{' '}
+              📦 Envío gratuito para pedidos superiores a 35€ 📦{'  '}
               <a href="/" className="font-semibold text-indigo-600 dark:text-indigo-300">
                 <span aria-hidden="true" className="absolute inset-0" />
                 Saber más <span aria-hidden="true">&rarr;</span>
@@ -28,11 +28,10 @@ export default function Hero() {
           </div>
           <div className="text-center">
             <h1 className="text-balance text-5xl font-semibold tracking-tight text-gray-900 dark:text-gray-100 sm:text-7xl">
-              Algo impactante pa que me compren cosas 💋
+              Ilumina tu entorno 🕯️
             </h1>
             <p className="mt-8 text-pretty text-lg font-medium text-gray-500 dark:text-gray-400 sm:text-xl/8">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-              fugiat veniam occaecat.
+              Velas hechas a mano al 100% con cera de soja.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
@@ -56,7 +55,7 @@ export default function Hero() {
               clipPath:
                 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
             }}
-            className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#902ef1] dark:from-violet-300 to-[#89ccfc] dark:to-teal-400 opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+            className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#cfcc25] dark:from-[#04a3f2] to-[#6e1765] dark:to-[#97e94a] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
           />
         </div>
       </div>

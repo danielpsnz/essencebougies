@@ -17,7 +17,7 @@ const Home = () => {
   });
 
   return (
-    <div>
+    <div className="bg-white dark:bg-slate-800">
       <Hero />
       <section className="py-20">
         <div className="container mx-auto">
