@@ -1,8 +1,10 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
+import Home from "../../../pages/Home";
+
 const Logo = ({ src, alt, className }) => (
-    <Link to="/">
+    <Link to={Home}>
         <img src={src} alt={alt} className={className}/>
     </Link>
 );

@@ -4,7 +4,7 @@ export default function Hero() {
     <div className="h-[800px] bg-lighthero dark:bg-hero bg-no-repeat bg-cover bg-center py-20 ">
 
       <div className="relative isolate px-6 pt-14 lg:px-8">
-        <div
+      <div
           aria-hidden="true"
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
         >

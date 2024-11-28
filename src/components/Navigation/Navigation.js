@@ -16,10 +16,15 @@ import { BsBag } from "react-icons/bs";
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
+// Páginas locales
+import Product from "../../pages/ProductDetails";
+import Blog from "../../pages/Blog";
+import About from "../../pages/About";
+
 const mainNavItems = [
-  { url: "/products", label: "Productos", current: false },
-  { url: "/the_essence", label: "The Essence", current: false },
-  { url: "/sobre_nosotros", label: "Sobre nosotros", current: false }
+  { url: {Product}, label: "Productos", current: false },
+  { url: {Blog}, label: "The Essence", current: false },
+  { url: {About}, label: "Sobre nosotros", current: false }
 ];
 
 const Navigation = () => {
@@ -122,7 +127,7 @@ const Navigation = () => {
                     href="/"
                     className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 data-[focus]:bg-gray-100 dark:data-[focus]:bg-gray-900 data-[focus]:outline-none"
                   >
-                    Your Profile
+                    🧍🏼‍♂️ Tu perfil
                   </a>
                 </MenuItem>
                 
@@ -131,7 +136,7 @@ const Navigation = () => {
                     href="/"
                     className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 data-[focus]:bg-gray-100 dark:data-[focus]:bg-gray-900 data-[focus]:outline-none"
                   >
-                    Settings
+                    ⚙️ Ajustes
                   </a>
                 </MenuItem>
                 
@@ -140,7 +145,7 @@ const Navigation = () => {
                     href="/"
                     className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 data-[focus]:bg-gray-100 dark:data-[focus]:bg-gray-900 data-[focus]:outline-none"
                   >
-                    Sign out
+                    🏃🏼‍♂️ Desconectarse
                   </a>
                 </MenuItem>
               </MenuItems>
