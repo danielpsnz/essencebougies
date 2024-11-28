@@ -265,6 +265,7 @@ module.exports = {
       },
       backgroundImage: {
         hero: "url('./img/bghero.jpg')",
+        lighthero: "url('./img/lighthero.png')",
       },
     },
     fill: ({ theme }) => ({

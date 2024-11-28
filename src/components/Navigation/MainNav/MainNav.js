@@ -12,7 +12,7 @@ const MainNav = ({ items, classNameDiv }) => (
                 href={item.url}
                 aria-current={item.current ? 'page' : undefined}
                 className={classNames(
-                item.current ? 'bg-gray-300 dark:bg-gray-900 text-black dark:text-white' : 'text-gray-900 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-slate-600 hover:text-black dark:hover:text-white',
+                item.current ? 'bg-gray-300 dark:bg-gray-900 text-black dark:text-white' : 'text-gray-900 dark:text-gray-100 hover:bg-[#438382b7] hover:text-black dark:hover:text-white',
                 'rounded-md px-3 py-2 text-sm font-medium',
                 )}
             >

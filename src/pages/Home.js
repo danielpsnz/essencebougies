@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
 import { ProductContext } from "../contexts/ProductContext";
+
 import Product from '../components/Product'
 import Hero from '../components/Hero'
+import Feature from "../components/FeatureSection";
 
 const Home = () => {
   // get products from product context
@@ -19,6 +21,7 @@ const Home = () => {
   return (
     <div className="bg-white dark:bg-slate-800">
       <Hero />
+      <Feature />
       <section className="py-20">
         <div className="container mx-auto">
           <h1 className="text-3xl font-semibold mb-10 text-center">Explore Our Products</h1>

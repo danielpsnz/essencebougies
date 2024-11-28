@@ -69,7 +69,7 @@ const Navigation = () => {
             </div>
 
             <div className="flex flex-1 items-center">
-              <div className="absolute left-1/2 transform -translate-x-1/2 lg:mt-2 xl:mt-4">
+              <div className="absolute left-1/2 transform -translate-x-1/2 lg:mt-2 xl:mt-4 dark:xl:mt-1">
                 <Logo src={darkMode ? LogoImagenDark : LogoImagenLight} alt="Logo de la empresa" className="h-14 w-auto mt-3" />
               </div>
 
@@ -92,7 +92,7 @@ const Navigation = () => {
                 onClick={() => setIsOpen(!isOpen)}
                 className="cursor-pointer flex absolute"
               >
-                <BsBag className="text-2xl mt-2" />
+                <BsBag className="text-2xl mt-2 dark:text-white" />
                 <div className="bg-red-500 absolute -right-2 -bottom-2 text-[12px] w-[18px] h-[18px] text-white dark:text-black rounded-full flex justify-center items-center">
                   {itemAmount}
                 </div>
