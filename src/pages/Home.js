@@ -5,6 +5,7 @@ import Product from '../components/Product'
 import Hero from '../components/Hero'
 import Feature from "../components/FeatureSection";
 import BentoGrid from "../components/BentoGrid";
+import Newsletter from "../components/Newsletter";
 
 const Home = () => {
   // get products from product context
@@ -36,6 +37,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <Newsletter />
     </div>
   );
 };
