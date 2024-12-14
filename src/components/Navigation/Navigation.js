@@ -4,12 +4,8 @@ import React, { useContext, useEffect, useState } from "react";
 // Recursos y Archivos Locales
 import { SidebarContext } from "../../contexts/SidebarContext";
 import { CartContext } from "../../contexts/CartContext";
-import { Logo, MainNav } from "./index.js";
-
-// Imágenes locales
-import LogoImagenLight from "../../assets/images/Logo_empresa_principal.png";
-import LogoImagenDark from "../../assets/images/Logo_empresa_beige.png";
-import Perfil from "../../assets/images/Imagen_perfil_provisional.jpeg"
+import { Logo } from "./index.js";
+import { fetchImages } from '../../server';
 
 // Iconos
 import { BsBag } from "react-icons/bs";
@@ -68,6 +64,8 @@ export default function Example() {
   const [darkMode, setDarkMode] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [closeTimeout, setCloseTimeout] = useState(null);
+  const [logoUrl, setLogoUrl] = useState(null);
+  const [perfil, setPerfil] = useState(null);
 
     // Event listener
     useEffect(() => {
@@ -75,6 +73,29 @@ export default function Example() {
         window.scrollY > 60 ? setIsActive(true) : setIsActive(false);
       });
     });
+
+    useEffect(() => {
+      const loadLogo = async () => {
+          const path = darkMode 
+              ? 'Principales_pagina_web/Logo_empresa_beige.png' 
+              : 'Principales_pagina_web/Logo_empresa_principal.png';
+
+          const url = await fetchImages(path); // Llama a la función para obtener la URL
+          setLogoUrl(url); // Actualiza el estado con la URL
+      };
+
+      loadLogo();
+    }, [darkMode]);
+
+  useEffect(() => {
+    const loadProfileImage = async () => {
+        // Aquí pasas la ruta correcta desde Firebase Storage
+        const url = await fetchImages('Principales_pagina_web/Imagen_perfil_provisional.jpeg');
+        setPerfil(url); // Actualizas el estado con la URL obtenida
+    };
+
+    loadProfileImage(); // Llama la función cuando el componente se monta
+    }, []);
   
     // Cambia el tema en el DOM
     useEffect(() => {
@@ -103,8 +124,8 @@ export default function Example() {
   return (
     <Disclosure as="nav" className={`fixed w-full z-10 lg:px-8 transition-all ${
       isActive
-        ? "py-4 shadow-md md:bg-white md:dark:bg-slate-800"
-        : "py-6 md:bg-transparent md:dark:bg-transparent"
+        ? "py-4 shadow-md lg:bg-white lg:dark:bg-slate-800"
+        : "py-6 lg:bg-transparent lg:dark:bg-transparent"
     } bg-white dark:bg-slate-800`}
     >
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -120,7 +141,7 @@ export default function Example() {
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="absolute left-1/2 transform -translate-x-1/2 lg:pt-3 sm:-mt-8">
-              <Logo src={darkMode ? LogoImagenDark : LogoImagenLight} alt="Logo de la empresa" className="h-14 w-auto mt-3" />
+              <Logo src={logoUrl} alt="Logo de la empresa" className="h-14 w-auto mt-3" />
             </div>
 
             <div className="hidden lg:block md:-ml-10">
@@ -208,7 +229,7 @@ export default function Example() {
                   <span className="sr-only">Open user menu</span>
                   <img
                     alt=""
-                    src={Perfil}
+                    src={perfil}
                     className="h-8 w-8 rounded-full"
                   />
                 </MenuButton>
@@ -219,7 +240,7 @@ export default function Example() {
               >
                 <MenuItem>
                   <a
-                    href="#"
+                    href="/"
                     className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                   >
                     Tu perfil
@@ -227,7 +248,7 @@ export default function Example() {
                 </MenuItem>
                 <MenuItem>
                   <a
-                    href="#"
+                    href="/"
                     className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                   >
                     Ajustes
@@ -235,7 +256,7 @@ export default function Example() {
                 </MenuItem>
                 <MenuItem>
                   <a
-                    href="#"
+                    href="/"
                     className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                   >
                     Desconectarse
