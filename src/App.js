@@ -1,4 +1,4 @@
-import {React, useState, useEffect} from "react";
+import { React, useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -10,9 +10,20 @@ import Product from "./components/Product";
 import Footer from "./components/Footer";
 
 const App = () => {
-
+  const [products, setProducts] = useState([]);
   const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const [darkMode, setDarkMode] = useState(prefersDarkMode);
+
+  useEffect(() => {
+    fetch('http://localhost:5001/api/productos')  // Cambiar a puerto 5001
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); // Verifica si la respuesta es correcta
+        })
+        .catch(error => {
+            console.error('Error al obtener los productos:', error);
+        });
+  }, []);
 
   // Cambia el modo en el DOM cuando el estado cambia.
   useEffect(() => {
@@ -45,9 +56,9 @@ const App = () => {
       <Router>
         <Navigation />
         <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/productlist" element={<ProductList />}></Route>
-          <Route path="/product" element={<Product />}></Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/productlist" element={<ProductList />} />
+          <Route path="/product" element={<Product producto={products}/>} />
         </Routes>
         <ShoppingCart />
         <Footer />

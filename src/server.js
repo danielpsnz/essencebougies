@@ -1,35 +1,46 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore } from 'firebase/firestore';
-import { getStorage, ref, getDownloadURL } from 'firebase/storage';
+const express = require('express');
+const mysql = require('mysql2');
+const cors = require('cors');
+require('dotenv').config();
 
-const firebaseConfig = {
-  apiKey: "AIzaSyC1XS_dsxeGMKwx4u0TlHUzd7nUnkpWnCk",
-  authDomain: "essence-bougies.firebaseapp.com",
-  projectId: "essence-bougies",
-  storageBucket: "essence-bougies.firebasestorage.app",
-  messagingSenderId: "579250475685",
-  appId: "1:579250475685:web:bc7f5face62e84badb334c",
-  measurementId: "G-YT8X42LQL6"
-};
+const app = express();
+// Habilitar CORS para el frontend en localhost:3000
+app.use(cors({
+  origin: 'http://localhost:3000',  // Permitir solicitudes solo de este origen
+  methods: 'GET, POST, PUT, DELETE',  // Métodos permitidos
+  allowedHeaders: 'Content-Type, Authorization'  // Cabeceras permitidas
+}));
+app.use(express.json()); // Para poder manejar JSON en las solicitudes
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const storage = getStorage(app);
+// Configura la conexión a la base de datos
+const db = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
+});
 
-const fetchImages = async (storageLocation) => {
-  try {
-      // Crea una referencia al archivo en Storage usando la ubicación
-      const storageRef = ref(storage, storageLocation);
+db.connect(err => {
+    if (err) {
+        console.error('Error al conectar a la base de datos:', err);
+    } else {
+        console.log('Conectado a la base de datos MySQL');
+    }
+});
 
-      // Obtén la URL de descarga pública
-      const url = await getDownloadURL(storageRef);
+// Ruta para obtener los productos
+app.get('/api/productos', (req, res) => {
+  const query = 'SELECT * FROM productos';
+  db.query(query, (err, results) => {
+      if (err) {
+          console.error('Error al obtener productos:', err);  // Muestra el error en consola
+          return res.status(500).send('Error al obtener productos');
+      }
+      res.json(results);  // Devuelve los resultados como JSON
+  });
+});
 
-      console.log("URL de la imagen:", url); // Muestra la URL pública
-      return url;
-  } catch (error) {
-      console.error("Error al obtener la URL de la imagen:", error);
-  }
-};
-
-export { db, storage, fetchImages };
+const port = 5001;  // Asegúrate de que el backend está en el puerto correcto
+app.listen(port, () => {
+    console.log(`Servidor backend escuchando en http://localhost:${port}`);
+});
