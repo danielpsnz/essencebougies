@@ -2,10 +2,11 @@ import {React, useState, useEffect} from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Home from "./pages/Home";
-import ProductDetails from "./pages/ProductDetails";
+import ProductList from "./pages/ProductList";
 
 import ShoppingCart from "./components/ShoppingCart";
 import Navigation from "./components/Navigation/Navigation";
+import Product from "./components/Product";
 import Footer from "./components/Footer";
 
 const App = () => {
@@ -38,14 +39,15 @@ const App = () => {
   
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
-  
+
   return (
     <div className="overflow-hidden">
       <Router>
         <Navigation />
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/product" element={<ProductDetails />}></Route>
+          <Route path="/productlist" element={<ProductList />}></Route>
+          <Route path="/product" element={<Product />}></Route>
         </Routes>
         <ShoppingCart />
         <Footer />

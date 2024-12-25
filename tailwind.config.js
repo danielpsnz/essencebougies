@@ -263,6 +263,9 @@ module.exports = {
         primary: '#222222',
         secondary: '#F5E6E0',
       },
+      gridTemplateRows: {
+        '[auto,auto,1fr]': 'auto auto 1fr',
+      },
       backgroundImage: {
         hero: "url('./img/bghero.jpg')",
         lighthero: "url('./img/lighthero.jpg')",
