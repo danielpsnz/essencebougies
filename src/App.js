@@ -15,14 +15,15 @@ const App = () => {
   const [darkMode, setDarkMode] = useState(prefersDarkMode);
 
   useEffect(() => {
-    fetch('http://localhost:5001/api/productos')  // Cambiar a puerto 5001
-        .then(response => response.json())
-        .then(data => {
-            console.log(data); // Verifica si la respuesta es correcta
-        })
-        .catch(error => {
-            console.error('Error al obtener los productos:', error);
-        });
+    fetch("http://localhost:5001/api/productos/") // Cambia a HTTPS solo si es necesario y está configurado
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => setProducts(data))
+      .catch((error) => console.error("Error al cargar los datos:", error));
   }, []);
 
   // Cambia el modo en el DOM cuando el estado cambia.

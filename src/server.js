@@ -29,7 +29,7 @@ db.connect(err => {
 });
 
 // Ruta para obtener los productos
-app.get('/api/productos', (req, res) => {
+app.get('/api/productos/', (req, res) => {
   const query = 'SELECT * FROM productos';
   db.query(query, (err, results) => {
       if (err) {

@@ -40,7 +40,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ProductPage({ producto }) {
+export default function ProductPage({ producto = [] }) {
   const [selectedColor, setSelectedColor] = useState(sharedData.colors[0])
   const [selectedSize, setSelectedSize] = useState(sharedData.sizes[0])
 
@@ -70,7 +70,7 @@ export default function ProductPage({ producto }) {
             ))}
             <li className="text-sm">
               {producto.map((item) => (
-                <a key={item.id} href="/" aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">
+                <a href="/" aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">
                 {item.name}
               </a>
               ))}
@@ -82,27 +82,23 @@ export default function ProductPage({ producto }) {
         {producto.map((item) => (
           <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
           <img
-            key={item.id}
             alt={item.name}
             src={item.images[0]}
             className="hidden size-full rounded-lg object-cover lg:block"
           />
           <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
             <img
-              key={item.id}
               alt={item.name}
               src={item.images[1]}
               className="aspect-[3/2] w-full rounded-lg object-cover"
             />
             <img
-              key={item.id}
               alt={item.name}
               src={item.images[2]}
               className="aspect-[3/2] w-full rounded-lg object-cover"
             />
           </div>
           <img
-            key={item.id}
             alt={item.name}
             src={item.images[3]}
             className="aspect-[4/5] size-full object-cover sm:rounded-lg lg:aspect-auto"
